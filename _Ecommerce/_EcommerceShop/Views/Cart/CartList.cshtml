@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "CartList";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="privacy about">
+    <h3>Giỏ hàng</h3>
+
+    <div class="checkout-right">
+        @if (ViewBag.Count > 0)
+        {
+            <h4>Giỏ hàng hiện có: <span>@ViewBag.Count + Sản phẩm</span></h4>
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>SL No.</th>
+                        <th>Product</th>
+                        <th>Quality</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Cart)
+                    {
+                        <tr class="rem1">
+                            <td class="invert">1</td>
+                            <td class="invert-image"><a href="single.html"><img src="@item.Product.Image" alt=" " class="img-responsive"></a></td>
+                            <td class="invert" style="width: 15%;">
+                                <div class="quantity">
+                                    <div class="quantity-select">
+                                        <button data-id="@item.Product.ID" class="entry value-minus btnMinus is-form">&nbsp;</button>
+                                        <input id="quantity" data-id="@item.Product.ID" max="@item.Product.Quantity" min="0" class="entry value input-qty" value="@item.Quantity" type="text" />
+                                        <button data-id="@item.Product.ID" class="entry value-plus btnPlus is-form">&nbsp;</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="invert"><p style="white-space: pre-wrap; overflow: hidden; text-overflow: ellipsis;">@item.Product.ProductName</p></td>
+
+                            <td class="invert">@(item.Product.Price*item.Quantity)</td>
+                            <td class="invert">
+                                <div class="rem">
+                                    <div data-id="@item.Product.ID" class="close1"> </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="padding:50px 0 0 0">
+                <button id="btnContinue" class="btn">Tiếp tục mua hàng</button>
+                <button id="btnUpdateCart" class="btn">Cập nhật giỏ hàng</button>
+                <button id="btnDeleteCart" class="btn">Xóa giỏ hàng</button>
+                <button id="btnCheckout" class="btn">Thanh toán</button>
+            </div>
+
+        }
+        else
+        {
+            <h4>Chưa có sản phẩm nào trong giỏ hàng!! Tiếp tục mua hàng</h4>
+            <button id="btnContinue" class="btn">Tiếp tục mua hàng</button>
+        }
+    </div>
+
+    <script src="~/Assets/Client/js/Controller/cartController.js"></script>
+    <script>
+    </script>
+</div>
+

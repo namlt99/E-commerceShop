@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Shipping";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    var fullName = ViewBag.Customer.FirstName + " " + ViewBag.Customer.MiddleName + " " + ViewBag.Customer.LastName;
+}
+@{ Html.RenderAction("ProcessingBar", "Checkout", new { });}
+<div class="checkout-left" style="padding: 30px;">
+    <h3>Shipping</h3>
+    <div class="col-md-6 checkout-left-basket" style="padding-left: 15px;">
+
+        <h4>Địa chỉ giao hàng</h4>
+        <ul>
+
+            <li>Họ tên: @fullName</li>
+            <li>Địa chỉ: @ViewBag.Customer.Address</li>
+            <li>Điện thoại: @ViewBag.Customer.NumberPhone</li>
+            @*<li>Mã khuyến mãi: <input type="text" style="width: 49%;" /><button style="width: 19%; font-size: 12px; margin-left: 5px;">Áp dụng</button></li>*@
+            <li><button id="btnPayment">Giao đến đây</button> <button id="editInfo">Sửa</button></li>
+        </ul>
+        <div>Bạn có muốn giao đến địa chỉ khác??<a id="btnNewaddress" class="btn">Thêm địa chỉ mới</a></div>
+    </div>
+    <div class="col-md-8 address_form_agile hidden" id="shipping" style="padding-left: 15px; float:none;padding-top:500px">
+        <h4>Sửa địa chỉ giao hàng</h4>
+        <form method="post" class="creditly-card-form agileinfo_form">
+            <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+                <div class="information-wrapper">
+                    <div class="first-row form-group">
+                        <div class="controls">
+                            <label class="control-label">Họ </label>
+                            <input class="billing-address-name form-control" type="text" name="firstName" placeholder="họ">
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Tên lót </label>
+                            <input class="billing-address-name form-control" type="text" name="middleName" placeholder="tên lót">
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Tên </label>
+                            <input class="billing-address-name form-control" type="text" name="lastName" placeholder="tên">
+                        </div>
+                        <div class="w3_agileits_card_number_grids">
+                            <div class="w3_agileits_card_number_grid_left">
+                                <div class="controls">
+                                    <label class="control-label">Điện thoại:</label>
+                                    <input class="form-control" type="text" name="numberPhone" placeholder="Mobile number">
+                                </div>
+                            </div>
+                            @*<div class="w3_agileits_card_number_grid_right">
+                                    <div class="controls">
+                                        <label class="control-label">Landmark: </label>
+                                        <input class="form-control" type="text" placeholder="Landmark">
+                                    </div>
+                                </div>
+                                <div class="clear"> </div>*@
+                        </div>
+                        <div class="controls">
+                            <label class="control-label">Địa chỉ: </label>
+                            <input class="form-control" type="text" name="address" placeholder="Town/City">
+                        </div>
+                        @*<div class="controls">
+                                <label class="control-label">Address type: </label>
+                                <select class="form-control option-w3ls">
+                                    <option>Office</option>
+                                    <option>Home</option>
+                                    <option>Commercial</option>
+
+                                </select>
+                            </div>*@
+                    </div>
+                    <button class="submit check_out">Delivery to this Address</button>
+                </div>
+            </section>
+        </form>
+        <div class="checkout-right-basket">
+            <a href="payment.html">Make a Payment <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+
+<script src="~/Assets/Client/js/Controller/CheckoutController.js"></script>

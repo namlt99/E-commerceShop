@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "_AdminMasterLayout";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="wrapper">
+    <div class="container">
+        <div class="dashboard">
+            <div class="left">
+                <span class="left__icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <div class="left__content">
+                    <div class="left__logo">LOGO</div>
+                    <div class="left__profile">
+                        <div class="left__image"><img src="~/Assets/Admin/assets/profile.jpg" alt=""></div>
+                        <p class="left__name">Hatsune Miku</p>
+                    </div>
+                    <ul class="left__menu">
+                        <li class="left__menuItem">
+                            <a href="/Admin/AdminHome/Index" class="left__title"><img src="~/Assets/Admin/assets/icon-dashboard.svg" alt="">Trang chủ</a>
+                        </li>
+                        <li class="left__menuItem">
+                            <div class="left__title"><img src="~/Assets/Admin/assets/icon-edit.svg" alt="">Quản lý hàng hóa<img class="left__iconDown" src="~/Assets/Admin/assets/arrow-down.svg" alt=""></div>
+                            <div class="left__text">
+                                <a class="left__link" href="/Admin/AdminProductGroup/AdminProductGroupList">Nhóm hàng hóa</a>
+                                <a class="left__link" href="/Admin/AdminCategory/AdminCategoryList">Danh mục sản phẩm</a>
+                                <a class="left__link" href="/Admin/AdminProduct/AdminProductList">Sản phẩm</a>
+                            </div>
+                        </li>
+                        <li class="left__menuItem">
+                            <div class="left__title"><img src="~/Assets/Admin/assets/icon-users.svg" alt="">Quản lý tài khoản<img class="left__iconDown" src="~/Assets/Admin/assets/arrow-down.svg" alt=""></div>
+                            <div class="left__text">
+                                <a class="left__link" href="/Admin/AdminUser/AdminUserManagerList">Ban quản trị</a>
+                                <a class="left__link" href="/Admin/AdminUser/AdminUserCustomerList">Khách hàng</a>
+                                <a class="left__link" href="/Admin/AdminUser/AdminUserEmployeeList">Nhân viên</a>
+                            </div>
+                        </li>
+                        <hr />
+                        <li class="left__menuItem">
+                            <div class="left__title"><img src="~/Assets/Admin/assets/icon-book.svg" alt="">Quản lý đơn hàng<img class="left__iconDown" src="~/Assets/Admin/assets/arrow-down.svg" alt=""></div>
+                            <div class="left__text">
+                                <a class="left__link" href="/Admin/AdminOrder/AdminOrderConfirm">Đơn hàng chờ xác nhận</a>
+                                <a class="left__link" href="/Admin/AdminOrder/AdminOrderPackaging">Đang đóng gói</a>
+                                <a class="left__link" href="/Admin/AdminOrder/AdminOrderTransported">Đang vận chuyển</a>
+                                <a class="left__link" href="/Admin/AdminOrder/AdminOrderDelivered">Đã giao</a>
+                            </div>
+                        </li>
+                        <li class="left__menuItem">
+                            <div class="left__title"><img src="~/Assets/Admin/assets/icon-settings.svg" alt="">System<img class="left__iconDown" src="~/Assets/Admin/assets/arrow-down.svg" alt=""></div>
+                            <div class="left__text">
+                                <a class="left__link" href="/Admin/AdminContact/AdminContactList">Contact</a>
+                                <a class="left__link" href="/Admin/AdminAbout/AdminAboutList">About</a>
+                            </div>
+                        </li>
+                        <li class="left__menuItem">
+                            <a href="/Admin/AdminFeedBack/AdminFeedBackList" class="left__title"><img src="~/Assets/Admin/assets/icon-users.svg" alt="">FeedBack</a>
+                        </li>
+                        <li class="left__menuItem">
+                            <a href="/Admin/AdminGiftCode/AdminGiftCodeList" class="left__title"><img src="~/Assets/Admin/assets/icon-book.svg" alt="">GiftCode</a>
+                        </li>
+                        <li class="left__menuItem">
+                            <a href="/Admin/AdminUser/AdminLogout" class="left__title"><img src="~/Assets/Admin/assets/icon-logout.svg" alt="">Đăng Xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                    @TempData["AlertMessage"]
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+    </div>
+</div>

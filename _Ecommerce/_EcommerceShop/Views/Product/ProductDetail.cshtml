@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    var finalPrice = ViewBag.Product.Price - (ViewBag.Product.Price / 100 * ViewBag.Product.Discount);
+}
+
+<link href="~/Assets/Client/css/slidea.css" rel="stylesheet" type="text/css" media="all" />
+
+<div class="agileinfo_single">
+    <h5>@ViewBag.Product.ProductName</h5>
+    <div class="col-md-4 agileinfo_single_left">
+        @for (int i = 0; i < Enumerable.Count(ViewBag.Images); i++)
+        {
+            <div class="mySlides">
+                <div class="numbertext">@i / @Enumerable.Count(ViewBag.Images)</div>
+                <img src="@ViewBag.Images[i].FileName" class="img-responsive" style="width:100%;object-fit:fill">
+                @*<img src="@ViewBag.Product.Image" class="img-responsive">*@
+            </div>
+        }
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <!-- Thumbnail images -->
+        <div class="row">
+
+            @for (int i = 0; i < Enumerable.Count(ViewBag.Images); i++)
+            {
+                <div class="column">
+                    <img class="demo cursor" src="@ViewBag.Images[i].FileName" onclick="currentSlide(@i+1)">
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-8 agileinfo_single_right">
+        <div class="rating1">
+            <span class="starRating">
+                <input id="rating5" type="radio" name="rating" value="5">
+                <label for="rating5">5</label>
+                <input id="rating4" type="radio" name="rating" value="4">
+                <label for="rating4">4</label>
+                <input id="rating3" type="radio" name="rating" value="3" checked="">
+                <label for="rating3">3</label>
+                <input id="rating2" type="radio" name="rating" value="2">
+                <label for="rating2">2</label>
+                <input id="rating1" type="radio" name="rating" value="1">
+                <label for="rating1">1</label>
+            </span>
+        </div>
+        <div class="snipcart-item block">
+            <div>
+                <input class="quan" type="number" min="1" max="@ViewBag.Product.Quantity" value="1"/>
+            </div>
+
+            <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                <h4>@finalPrice đ <span>@ViewBag.Product.Price đ</span></h4>
+            </div>
+
+            <div class="snipcart-details agileinfo_single_right_details">
+                <form action="#" method="post">
+                    <fieldset>
+                        <input type="hidden" name="cmd" value="_cart">
+                        <input type="hidden" name="add" value="1">
+                        <input type="hidden" name="business" value=" ">
+                        <input type="hidden" name="item_name" value="pulao basmati rice">
+                        <input type="hidden" name="amount" value="21.00">
+                        <input type="hidden" name="discount_amount" value="1.00">
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="return" value=" ">
+                        <input type="hidden" name="cancel_return" value=" ">
+                        <input type="submit" data-id="@ViewBag.Product.ID" name="submit" value="Add to cart" class="button btnaddtocart">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<div class="col-md-8">
+    <div class="w3agile_description">
+        <h4>Description :</h4>
+        @Html.Raw(@ViewBag.Product.Detail)
+    </div>
+</div>
+
+<script src="~/Assets/Client/js/slideImage.js"></script>
+@*<script src="~/Assets/Client/js/Controller/cartController.js"></script>*@
+<script>
+
+        var imgEl = document.getElementsByTagName('img');
+        for (var i = 0; i < imgEl.length; i++) {
+            if (imgEl[i].getAttribute('data-src')) {
+                imgEl[i].setAttribute('src', imgEl[i].getAttribute('data-src'));
+                imgEl[i].removeAttribute('data-src'); //use only if you need to remove data-src attribute after setting src
+            }
+        }
+       
+    
+    $('.btnaddtocart').on('click', function () {
+        var quan = $('.quan').val();
+        $.ajax({
+            url: '/Cart/AddItem',
+            data: { productId: $(this).data('id'), quantity: quan},
+            type: 'POST',
+            dataType: 'json',
+            success: function (res) {
+                if (res.status == true) {
+
+                }
+            }
+        })
+    })
+</script>

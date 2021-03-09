@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "AdminContactEdit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMasterLayout.cshtml";
+}
+<div class="right">
+    <div class="right__content">
+        <div class="right__title">Bảng điều khiển</div>
+        <p class="right__desc">Chèn danh mục</p>
+        <div class="right__formWrapper">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="right__inputWrapper">
+                    <label for="desc">Mô tả</label>
+                    <textarea name="content" id="" cols="30" rows="10" placeholder="Mô tả">@ViewBag.Result.Content</textarea>
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="category">Status</label>
+                    <select name="status">
+                        <option disabled="" selected="">Chọn thể loại</option>
+                        <option value="0">khoa</option>
+                        <option value="1">kich hoat</option>
+                    </select>
+                </div>
+                <button class="btn" type="submit">Chèn</button>
+            </form>
+        </div>
+    </div>
+</div>

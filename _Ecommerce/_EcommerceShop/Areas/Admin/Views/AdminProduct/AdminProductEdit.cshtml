@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "AdminProductEdit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMasterLayout.cshtml";
+}
+<script src="~/Assets/Admin/js/plugins/ckeditor/ckeditor.js"></script>
+<div class="right">
+    <div class="right__content">
+        <div class="right__title">Bảng điều khiển</div>
+        <p class="right__desc">Chèn mã giảm giá</p>
+        <div class="right__formWrapper">
+            <form action="#" method="post">
+                <div class="right__inputWrapper">
+                    <label for="product">Danh mục sản phẩm</label>
+                    <select name="categoryId">
+                        <option value="@ViewBag.CategorySelected.ID">@ViewBag.CategorySelected.CategoryName</option>
+                        @foreach (var item in ViewBag.Category)
+                        {
+                            <option value="@item.ID">@item.CategoryName</option>
+                        }
+                    </select>
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Tên sản phẩm</label>
+                    <input name="productName" type="text" value="@ViewBag.Result.ProductName" placeholder="name..">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Mã sản phẩm</label>
+                    <input name="productCode" type="text" value="@ViewBag.Result.ProductCode" placeholder="code..">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Seo Title</label>
+                    <input name="seoTitle" type="text" value="@ViewBag.Result.SeoTitle" placeholder="seoTitle..">
+                </div>
+                <div class="">
+                    <label for="title">Hình ảnh</label>
+                    <img src="@ViewBag.Result.Image" />
+                    <input name="image" type="file" placeholder="hình ảnh..">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Giá</label>
+                    <input name="price" type="number" value="@ViewBag.Result.Price" min="0" placeholder="giá..">
+                </div>
+
+                <div class="right__inputWrapper">
+                    <label for="title">Số lượng</label>
+                    <input name="quantity" type="number" min="0" value="@ViewBag.Result.Quantity" placeholder="số lượng">
+                </div>
+                <div class="right__inputWrapper" style="width:500px">
+                    <label for="title">Chi tiết</label>
+                    <textarea name="detail" id="detail" value="@ViewBag.Result.Detail" cols="30" rows="10" placeholder="Mô tả"></textarea>
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">top Hot</label>
+                    <input name="topHot" type="datetime-local" placeholder="ngày hot">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="product">Trạng thái</label>
+                    @if (@ViewBag.Result.Status)
+                    {
+                        <select name="status">
+                            <option value="1">Use</option>
+                            <option value="0">Lock</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select name="status">
+                            <option value="0">lock</option>
+                            <option value="1">Use</option>
+                        </select>
+                    }
+                </div>
+                <button class="btn" type="submit">Chèn</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace("detail");
+    //CKEDITOR.instances.detail.setData(@ViewBag.Result.Detail);
+</script>
+

@@ -1,0 +1,69 @@
+﻿@model PagedList.IPagedList<Models._01.Entity.Contact>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "AdminContactList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMasterLayout.cshtml";
+}
+
+<div class="right">
+    <div class="right__content">
+        <div class="right__title">Bảng điều khiển</div>
+
+        <p class="right__desc">Xem thể loại</p>
+        <div class="input_Search">
+            <form method="get">
+                <input type="text" name="searchString" placeholder="search..." />
+                <button type="submit">Tìm</button>
+            </form>
+
+        </div>
+        <div class="right__iconTable" id="btn_add">
+            <button onclick="btn_Add()"><img src="~/Assets/Admin/assets/plus-circle-solid.svg" alt=""></button>
+        </div>
+        <div class="right__table">
+            <div class="right__tableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Mô tả</th>
+                            <th>Trạng thái</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td data-label="STT">@item.ID</td>
+                                <td data-label="Mô tả">@Html.Raw(@item.Content)</td>
+                                <td data-label="Tiêu đề">@item.Status</td>
+                                <td data-label="Sửa" class="right__iconTable">
+                                    <button onclick="nam()"><img src="~/Assets/Admin/assets/eye-regular.svg" alt=""></button>
+                                    <button onclick="btn_Edit(@item.ID)"><img src="~/Assets/Admin/assets/icon-edit.svg" alt=""></button>
+                                    <button onclick="btn_Delete(@item.ID)"><img src="~/Assets/Admin/assets/icon-trash-black.svg" alt=""></button>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @Html.PagedListPager(Model, Page => Url.Action("AdminContactList", new { Page, @searchString = @ViewBag.searchString }))
+    </div>
+</div>
+
+<script>
+    function btn_Add() {
+        window.location.replace("/Admin/AdminContact/AdminContactInsert");
+    }
+    function btn_Edit(id) {
+            window.location.replace("/Admin/AdminContact/AdminContactEdit?id=" + id);
+    }
+    function btn_Delete(id) {
+            window.location.replace("/Admin/AdminContact/AdminContactDelete?id=" + id);
+    }
+
+</script>

@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "AdminCategoryEdit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMasterLayout.cshtml";
+}
+
+<div class="right">
+    <div class="right__content">
+        <div class="right__title">Bảng điều khiển</div>
+        <p class="right__desc">Chèn mã giảm giá</p>
+        <div class="right__formWrapper">
+            <form action="#" method="post">
+                <div class="right__inputWrapper">
+                    <label for="title">Tên danh mục</label>
+                    <input name="categoryName" type="text" value="@ViewBag.Result.CategoryName" placeholder="Tiêu đề">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Seo Title</label>
+                    <input value="@ViewBag.Result.SeoTitle" name="seoTitle" type="text" placeholder="Seo Title">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="product">Nhóm hàng hóa</label>
+                    <select name="productGroupId">
+                        <option value="@ViewBag.ProductGroupSelected.ID">@ViewBag.ProductGroupSelected.ProductGroupName</option>
+                        @foreach (var item in ViewBag.ProductGroup)
+                        {
+                            <option value="@item.ID">@item.ProductGroupName</option>
+                        }
+                    </select>
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="product">Trạng thái</label>
+                    @if (@ViewBag.Result.Status)
+                    {
+                        <select name="status">
+                            <option value="1">Use</option>
+                            <option value="0">Lock</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select name="status">
+                            <option value="0">lock</option>
+                            <option value="1">Use</option>
+                        </select>
+                    }
+
+                </div>
+                <button class="btn" type="submit">Chèn</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

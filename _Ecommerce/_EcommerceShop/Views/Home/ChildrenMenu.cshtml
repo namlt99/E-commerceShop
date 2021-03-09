@@ -1,0 +1,13 @@
+﻿@if ((int)ViewBag.Count > 0)
+{
+    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+        <div class="w3ls_vegetables">
+            <ul>
+                @foreach (var item in ViewBag.ChildrenMenu)
+                {
+                    <li><a href="/san-pham/@item.CategoryMetaTitle-@item.ID">@item.CategoryName</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+}

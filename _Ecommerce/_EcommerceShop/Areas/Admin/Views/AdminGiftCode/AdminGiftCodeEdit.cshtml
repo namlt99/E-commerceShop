@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "AdminGiftCodeEdit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMasterLayout.cshtml";
+}
+
+<div class="right">
+    <div class="right__content">
+        <div class="right__title">Bảng điều khiển</div>
+        <p class="right__desc">Chèn mã giảm giá</p>
+        <div class="right__formWrapper">
+            <form action="#" method="post">
+                <div class="right__inputWrapper">
+                    <label for="title">Mã </label>
+                    <input name="code" value="@ViewBag.Result.Code" type="text" placeholder="Mã..">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Giá trị (đơn vị:%)</label>
+                    <input name="value" value="@ViewBag.Result.Value" type="number" min="0" max="100" placeholder="Giá trị">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Ngày bắt đầu</label>
+                    <input name="startDate" value="@ViewBag.Result.StartDate" type="datetime-local" placeholder="Giá trị">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="title">Ngày kết thúc</label>
+                    <input name="endDate" value="@ViewBag.Result.EndDate" type="datetime-local" placeholder="Giá trị">
+                </div>
+                <div class="right__inputWrapper">
+                    <label for="product">Trạng thái</label>
+                    @if (@ViewBag.Result.Status)
+                    {
+                        <select name="status">
+                            <option value="1">Use</option>
+                            <option value="0">Lock</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select name="status">
+                            <option value="0">lock</option>
+                            <option value="1">Use</option>
+                        </select>
+                    }
+                </div>
+                <button class="btn" type="submit">Chèn</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

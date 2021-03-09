@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<Models._01.Entity.GiftCode>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "AdminGiftCodeList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMasterLayout.cshtml";
+}
+
+<div class="right">
+    <div class="right__content">
+        <div class="right__title">Bảng điều khiển</div>
+
+        <p class="right__desc">Xem thể loại</p>
+        <div class="input_Search">
+            <form method="get">
+                <input type="text" name="searchString" placeholder="search..." />
+                <button type="submit">Tìm</button>
+            </form>
+
+        </div>
+        <div class="right__iconTable" id="btn_add">
+            <button onclick="btn_Add()"><img src="~/Assets/Admin/assets/plus-circle-solid.svg" alt=""></button>
+        </div>
+        <div class="right__table">
+            <div class="right__tableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Giá trị(%)</th>
+                            <th>Mã GiftCode</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td data-label="STT">@Model[i].ID</td>
+                                <td data-label="Mô tả">@Model[i].Value</td>
+                                <td data-label="Tiêu đề">@Model[i].Code</td>
+                                <td data-label="Tiêu đề">@Model[i].Status</td>
+                                <td data-label="Tiêu đề">@Model[i].CreatedDate</td>
+                                <td data-label="Sửa" class="right__iconTable">
+                                    <button onclick="nam()"><img src="~/Assets/Admin/assets/eye-regular.svg" alt=""></button>
+                                    <button onclick="btn_Edit(@Model[i].ID)"><img src="~/Assets/Admin/assets/icon-edit.svg" alt=""></button>
+                                    <button onclick="btn_Delete(@Model[i].ID)"><img src="~/Assets/Admin/assets/icon-trash-black.svg" alt=""></button>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @Html.PagedListPager(Model, Page => Url.Action("AdminProductGroupList", new { Page, @searchString = @ViewBag.searchString }))
+    </div>
+</div>
+
+<script>
+    function btn_Add() {
+        window.location.replace("/Admin/AdminGiftCode/AdminGiftCodeInsert");
+    }
+    function btn_Edit(id) {
+        window.location.replace("/Admin/AdminGiftCode/AdminGiftCodeEdit?id=" + id);
+    }
+    function btn_Delete(id) {
+        window.location.replace("/Admin/AdminGiftCode/AdminGiftCodeDelete?id=" + id);
+    }
+
+</script>
